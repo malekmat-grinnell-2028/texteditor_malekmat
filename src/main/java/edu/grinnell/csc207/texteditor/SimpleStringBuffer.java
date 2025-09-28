@@ -4,36 +4,61 @@ package edu.grinnell.csc207.texteditor;
  * A naive implementation of a text buffer using a <code>String</code>.
  */
 public class SimpleStringBuffer {
+    public String str;
+    public int index;
+
+    /**
+     * constructs a new empty string buffer by setting str to "" and index to 0
+     */
+    public SimpleStringBuffer() {
+        str = "";
+        index = 0;
+    }
+
     public void insert(char ch) {
-        throw new UnsupportedOperationException("Unimplemented method 'delete'");
+        str += ch;
+        index++;
     }
 
     public void delete() {
-        throw new UnsupportedOperationException("Unimplemented method 'delete'");
+        if(str.equals("")){
+            return;
+        }else {
+            if(index == str.length()-1){
+                str = str.substring(0, index - 2);
+            }else{
+            str = str.substring(0, index - 2) + str.substring(index-1);
+            index--;
+            }
+        }
     }
 
     public int getCursorPosition() {
-        throw new UnsupportedOperationException("Unimplemented method 'getCursorPosition'");
+        return index;
     }
 
     public void moveLeft() {
-        throw new UnsupportedOperationException("Unimplemented method 'moveLeft'");
+        if(index > 0) {
+            index--;
+        }
     }
 
     public void moveRight() {
-        throw new UnsupportedOperationException("Unimplemented method 'moveRight'");
+        if(index < str.length()) {
+            index++;
+        }
     }
 
     public int getSize() {
-        throw new UnsupportedOperationException("Unimplemented method 'getSize'");
+        return str.length();
     }
 
     public char getChar(int i) {
-        throw new UnsupportedOperationException("Unimplemented method 'getChar'");
+        return str.charAt(i);
     }
 
     @Override
     public String toString() {
-        throw new UnsupportedOperationException("Unimplemented method 'toString'");
+        return str;
     }
 }
